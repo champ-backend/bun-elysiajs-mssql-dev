@@ -1,0 +1,13 @@
+git config --global user.name "champ-backend"
+git config --global user.email "natthaphong.thammabut@fujifilm.com"
+
+
+git config --local user.name "champ-backend"
+git config --local user.email "natthaphong.thammabut@fujifilm.com"
+
+
+git config --list
+
+
+git clone https://username:password@github.com/REPO_NAME/repo.git
+git clone https://champ-backend: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@github.com/ftaidevteam/middleware-backend.git

@@ -1,0 +1,57 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 42001
+  },
+  "rateLimit": {
+    "headers": true,
+    "scoping": "scoped",
+    "countFailedRequest": true,
+    "duration": 60000,
+    "maxIps": 100
+  },
+  "basicAuth": {
+    "username": "DEVBasicAuthenticationElisiaBUN",
+    "password": "DevElisiaBUN9fGqZe7yMpRt2dL8vWd25oJk765394638457456586802030z1"
+  },
+  "jwt": {
+    "hash": "DEVFTAI8e35f6ec91fe60b5ljidfjlnHGHHGT61013336c9ace5CdHAMPJWT",
+    "options": {
+      "expiresIn": "30d"
+    },
+    "optionsMobile": {
+      "expiresIn": "30d"
+    }
+  },
+  "database": {
+    "type": "sqlserver",
+    "host": "192.168.24.22",
+    "port": 1433,
+    "username": "natthaphong",
+    "password": "ArChamp@2024",
+    "name": "prod_middleware",
+    "charset": "utf8mb4",
+    "logging": ["error", "log"],
+    "entities": ["src/models/**/*.ts"],
+    "timezone": "utc",
+    "filepath": "/home",
+    "poolMin": 10,
+    "poolMax": 50,
+    "poolIdleTimeout": 30000,
+    "poolAcquireTimeout": 60000
+  },
+  "fileSystem": {
+    "type": ["image/png", "image/jpeg", "application/pdf", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "text/csv", "application/vnd.ms-excel"],
+    "limit": 5242880,
+    "filename": "FTAI_MIDDLEWARE",
+    "directoryPath": "./src/store"
+  },
+  "redis": {
+    "url": "",
+    "host": "localhost",
+    "port": 6379
+  },
+  "fileLocation": {
+    "tiktok": "src/content/Tiktok.xlsx"
+  }
+}

@@ -1,0 +1,8 @@
+[
+  { "vat": 7, "country": "TH", "status": "ACTIVE" },
+  { "vat": 7, "country": "US", "status": "ACTIVE" },
+  { "vat": 7, "country": "SG", "status": "ACTIVE" },
+  { "vat": 7, "country": "JP", "status": "ACTIVE" },
+  { "vat": 7, "country": "PH", "status": "ACTIVE" },
+  { "vat": 7, "country": "IN", "status": "ACTIVE" }
+]

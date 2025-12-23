@@ -1,0 +1,5 @@
+
+    pm2 list                #ดูสถานะของ Process ทั้งหมด
+    pm2 log app_id          #ดู Log แอปพลิเคชัน
+    pm2 restart app_id      #Restart แอปพลิเคชัน
+    pm2 stop app_id         #Stop แอปพลิเคชัน

@@ -1,0 +1,242 @@
+[
+  {
+    "bankName": "ธนาคารกรุงเทพ",
+    "set": "BBL",
+    "swiftCode": "BKKBTHBK",
+    "bankNo": "002",
+    "bankOfficialName": "BANGKOK BANK PUBLIC COMPANY LTD.",
+    "bankNiceName": "Bangkok Bank"
+  },
+  {
+    "bankName": "ธนาคารกสิกรไทย",
+    "set": "KBANK",
+    "swiftCode": "KASITHBK,",
+    "bankNo": "004",
+    "bankOfficialName": "KASIKORNBANK PUBLIC COMPANY LTD.",
+    "bankNiceName": "Kasikorn Bank"
+  },
+  {
+    "bankName": "ธนาคารรอยัล แบงก์ ออฟ สก็อตแลนด์",
+    "set": "RBS",
+    "swiftCode": "RBOSGB2L",
+    "bankNo": "005",
+    "bankOfficialName": "THE ROYAL BANK OF SCOTLAND PLC",
+    "bankNiceName": "Royal Bank of Scotland"
+  },
+  {
+    "bankName": "ธนาคารกรุงไทย",
+    "set": "KTB",
+    "swiftCode": "KRTHTHBK",
+    "bankNo": "006",
+    "bankOfficialName": "KRUNG THAI BANK PUBLIC COMPANY LTD.",
+    "bankNiceName": "Krungthai Bank"
+  },
+  {
+    "bankName": "ธนาคารเจพีมอร์แกน เชส",
+    "set": "JPM",
+    "swiftCode": "CHASTHBXSEC",
+    "bankNo": "008",
+    "bankOfficialName": "JPMORGAN CHASE BANK, NATIONAL ASSOCIATION",
+    "bankNiceName": "J.P. Morgan"
+  },
+  {
+    "bankName": "ธนาคารโตเกียว-มิตซูบิชิ ยูเอฟเจ",
+    "set": "MUFG",
+    "swiftCode": "BOTKTHBX",
+    "bankNo": "010",
+    "bankOfficialName": "THE BANK OF TOKYO-MITSUBISHI UFJ, LTD.",
+    "bankNiceName": "Bank of Tokyo-Mitsubishi UFJ"
+  },
+  {
+    "bankName": "ธนาคารไทยพาณิชย์",
+    "set": "SCB",
+    "swiftCode": "SICOTHBK",
+    "bankNo": "014",
+    "bankOfficialName": "SIAM COMMERCIAL BANK PUBLIC COMPANY LTD.",
+    "bankNiceName": "Siam Commercial Bank"
+  },
+  {
+    "bankName": "ธนาคารซิตี้แบงค์",
+    "set": "CITI",
+    "swiftCode": "CITITHBX",
+    "bankNo": "017",
+    "bankOfficialName": "CITIBANK, N.A.",
+    "bankNiceName": "Citibank"
+  },
+  {
+    "bankName": "ธนาคาร ซูมิโตโม มิตซุย แบงกิ้ง คอร์ปอเรชั่น",
+    "set": "SMBC",
+    "swiftCode": "SMBCTHBK",
+    "bankNo": "018",
+    "bankOfficialName": "SUMITOMO MITSUI BANKING CORPORATION",
+    "bankNiceName": "Sumitomo Mitsui Banking Corporation"
+  },
+  {
+    "bankName": "ธนาคารสแตนดาร์ดชาร์เตอร์ด (ไทย)",
+    "set": "SC",
+    "swiftCode": "SCBLTHBX",
+    "bankNo": "020",
+    "bankOfficialName": "STANDARD CHARTERED BANK (THAI) PUBLIC COMPANY LIMITED",
+    "bankNiceName": "Standard Chartered (Thai)"
+  },
+  {
+    "bankName": "ธนาคารซีไอเอ็มบีไทย",
+    "set": "CIMB",
+    "swiftCode": "UBOBTHBK",
+    "bankNo": "022",
+    "bankOfficialName": "CIMB THAI BANK PUPBLIC COMPANY LTD.",
+    "bankNiceName": "CIMB Thai Bank"
+  },
+  {
+    "bankName": "ธนาคารยูโอบี",
+    "set": "UOB",
+    "swiftCode": "UOVBTHBK",
+    "bankNo": "024",
+    "bankOfficialName": "UNITED OVERSEAS BANK (THAI) PUBLIC COMPANY LIMITED",
+    "bankNiceName": "United Overseas Bank (Thai)"
+  },
+  {
+    "bankName": "ธนาคารกรุงศรีอยุธยา",
+    "set": "BAY",
+    "swiftCode": "AYUDTHBK",
+    "bankNo": "025",
+    "bankOfficialName": "BANK OF AYUDHYA PUBLIC COMPANY LTD.",
+    "bankNiceName": "Bank of Ayudhya (Krungsri)"
+  },
+  {
+    "bankName": "ธนาคารเมกะ สากลพาณิชย์",
+    "set": "MEGA",
+    "swiftCode": "ICBCTHBKBNA",
+    "bankNo": "026",
+    "bankOfficialName": "MEGA INTERNATIONAL COMMERCIAL BANK PUBLIC COMPANY LIMITED",
+    "bankNiceName": "Mega International Commercial Bank"
+  },
+  {
+    "bankName": "แบงค์ออฟอเมริกา",
+    "set": "BOA",
+    "swiftCode": "BOFATH2X",
+    "bankNo": "027",
+    "bankOfficialName": "BANK OF AMERICA, NATIONAL ASSOCIATION",
+    "bankNiceName": "Bank of America"
+  },
+  {
+    "bankName": "ธนาคารเครดิตอากริโคล",
+    "set": "CACIB",
+    "swiftCode": "AGRITHB1",
+    "bankNo": "028",
+    "bankOfficialName": "CREDIT AGRICOLE CORPORATE AND INVESTMENT BANK",
+    "bankNiceName": "Crédit Agricole"
+  },
+  {
+    "bankName": "ธนาคารออมสิน",
+    "set": "GSB",
+    "swiftCode": "GSBATHBK",
+    "bankNo": "030",
+    "bankOfficialName": "THE GOVERNMENT SAVINGS BANK",
+    "bankNiceName": "Government Savings Bank"
+  },
+  {
+    "bankName": "ธนาคารเอชเอสบีซี ประเทศไทย",
+    "set": "HSBC",
+    "swiftCode": "HSBCTHBK",
+    "bankNo": "031",
+    "bankOfficialName": "THE HONGKONG AND SHANGHAI BANKING CORPORATION LTD.",
+    "bankNiceName": "Hongkong and Shanghai Banking Corporation"
+  },
+  {
+    "bankName": "ธนาคารดอยซ์แบงก์",
+    "set": "DB",
+    "swiftCode": "DEUTTHBK",
+    "bankNo": "032",
+    "bankOfficialName": "DEUTSCHE BANK AG.",
+    "bankNiceName": "Deutsche Bank"
+  },
+  {
+    "bankName": "ธนาคารอาคารสงเคราะห์",
+    "set": "GHB",
+    "swiftCode": "GOHUTHB1",
+    "bankNo": "033",
+    "bankOfficialName": "THE GOVERNMENT HOUSING BANK",
+    "bankNiceName": "Government Housing Bank"
+  },
+  {
+    "bankName": "ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร",
+    "set": "BAAC",
+    "swiftCode": "BAABTHBK",
+    "bankNo": "034",
+    "bankOfficialName": "BANK FOR AGRICULTURE AND AGRICULTURAL COOPERATIVES",
+    "bankNiceName": "Bank for Agriculture and Agricultural Cooperatives"
+  },
+  {
+    "bankName": "ธนาคารมิซูโฮ",
+    "set": "MB",
+    "swiftCode": "MHCBTHBK",
+    "bankNo": "039",
+    "bankOfficialName": "MIZUHO BANK, LTD.",
+    "bankNiceName": "Mizuho Bank"
+  },
+  {
+    "bankName": "ธนาคารบีเอ็นพี พารีบาส์",
+    "set": "BNP",
+    "swiftCode": "BNPATHBK",
+    "bankNo": "045",
+    "bankOfficialName": "BNP PARIBAS",
+    "bankNiceName": "BNP Paribas"
+  },
+  {
+    "bankName": "ธนาคารอิสลามแห่งประเทศไทย",
+    "set": "IBANK",
+    "swiftCode": "TIBTTHBK",
+    "bankNo": "066",
+    "bankOfficialName": "ISLAMIC BANK OF THAILAND",
+    "bankNiceName": "Islamic Bank of Thailand"
+  },
+  {
+    "bankName": "ธนาคารทิสโก้",
+    "set": "TISCO",
+    "swiftCode": "TFPCTHB1",
+    "bankNo": "067",
+    "bankOfficialName": "TISCO BANK PUBLIC COMPANY LIMITED",
+    "bankNiceName": "Tisco Bank"
+  },
+  {
+    "bankName": "ธนาคารเกียรตินาคิน",
+    "set": "KK",
+    "swiftCode": "KKPBTHBK",
+    "bankNo": "069",
+    "bankOfficialName": "KIATNAKIN BANK PUBLIC COMPANY LIMITED",
+    "bankNiceName": "Kiatnakin Bank"
+  },
+  {
+    "bankName": "ธนาคารไอซีบีซี (ไทย)",
+    "set": "ICBC",
+    "swiftCode": "ICBKTHBK",
+    "bankNo": "070",
+    "bankOfficialName": "INDUSTRIAL AND COMMERCIAL BANK OF CHINA (THAI) PUBLIC COMPANY LIMITED",
+    "bankNiceName": "Industrial and Commercial Bank of China (Thai)"
+  },
+  {
+    "bankName": "ธนาคารไทยเครดิต",
+    "set": "TCRB",
+    "swiftCode": "THCETHB1",
+    "bankNo": "071",
+    "bankOfficialName": "THE THAI CREDIT RETAIL BANK PUBLIC COMPANY LIMITED",
+    "bankNiceName": "Thai Credit Retail Bank"
+  },
+  {
+    "bankName": "ธนาคารแลนด์ แอนด์ เฮ้าส์",
+    "set": "LHB",
+    "swiftCode": "LAHRTHB2",
+    "bankNo": "073",
+    "bankOfficialName": "LAND AND HOUSES BANK PUBLIC COMPANY LIMITED",
+    "bankNiceName": "Land and Houses Bank"
+  },
+  {
+    "bankName": "ธนาคารทหารไทยธนชาต",
+    "set": "TTB",
+    "swiftCode": "TMBKTHBK",
+    "bankNo": "076",
+    "bankOfficialName": "TMBTHANACHART BANK PUBLIC COMPANY LIMITED",
+    "bankNiceName": "TMBThanachart Bank"
+  }
+]

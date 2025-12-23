@@ -1,0 +1,309 @@
+// อินเทอร์เฟซสำหรับข้อมูลลูกค้าในคำสั่งซื้อ
+interface OrderCustomerInfo {
+  name: string                // ชื่อของลูกค้า
+  email: string               // อีเมลของลูกค้า
+  acceptsMarketing: boolean   // ระบุว่าลูกค้ายอมรับการตลาดหรือไม่ (true/false)
+  phone?: string              // หมายเลขโทรศัพท์ของลูกค้า
+  billingName?: string        // ชื่อสำหรับใบแจ้งหนี้
+  billingStreet?: string      // ถนนสำหรับใบแจ้งหนี้
+  billingAddress1?: string    // ที่อยู่บรรทัดที่ 1 สำหรับใบแจ้งหนี้
+  billingAddress2?: string    // ที่อยู่บรรทัดที่ 2 สำหรับใบแจ้งหนี้
+  billingCompany?: string     // ชื่อบริษัทสำหรับใบแจ้งหนี้
+  billingCity?: string        // เมืองสำหรับใบแจ้งหนี้
+  billingZip?: string         // รหัสไปรษณีย์สำหรับใบแจ้งหนี้
+  billingProvince?: string    // จังหวัดสำหรับใบแจ้งหนี้
+  billingCountry?: string     // ประเทศสำหรับใบแจ้งหนี้
+  billingPhone?: string       // หมายเลขโทรศัพท์สำหรับใบแจ้งหนี้
+  shippingName?: string       // ชื่อสำหรับการจัดส่ง
+  shippingStreet?: string     // ถนนสำหรับการจัดส่ง
+  shippingAddress1?: string   // ที่อยู่บรรทัดที่ 1 สำหรับการจัดส่ง
+  shippingAddress2?: string   // ที่อยู่บรรทัดที่ 2 สำหรับการจัดส่ง
+  shippingCompany?: string    // ชื่อบริษัทสำหรับการจัดส่ง
+  shippingCity?: string       // เมืองสำหรับการจัดส่ง
+  shippingZip?: string        // รหัสไปรษณีย์สำหรับการจัดส่ง
+  shippingProvince?: string   // จังหวัดสำหรับการจัดส่ง
+  shippingCountry?: string    // ประเทศสำหรับการจัดส่ง
+  shippingPhone?: string      // หมายเลขโทรศัพท์สำหรับการจัดส่ง
+  notes?: string              // หมายเหตุเพิ่มเติมจากลูกค้า
+  noteAttributes?: string     // คุณสมบัติหรือข้อมูลเพิ่มเติมในหมายเหตุ
+}
+
+// อินเทอร์เฟซสำหรับรายการสินค้าในคำสั่งซื้อ
+interface OrderLineItem {
+  quantity: number            // จำนวนสินค้าในรายการ
+  name: string                // ชื่อสินค้าในรายการ
+  price: number               // ราคาสินค้าในรายการ
+  compareAtPrice?: number     // ราคาเปรียบเทียบของสินค้า (ถ้ามี)
+  sku?: string                // รหัสสินค้า (SKU)
+  requiresShipping: boolean   // ระบุว่าสินค้าต้องการการจัดส่งหรือไม่
+  taxable: boolean            // ระบุว่าสินค้าต้องเสียภาษีหรือไม่
+  fulfillmentStatus?: string  // สถานะการจัดส่งของสินค้า
+  discount?: number           // จำนวนส่วนลดของสินค้า
+}
+
+// อินเทอร์เฟซสำหรับข้อมูลภาษีในคำสั่งซื้อ
+interface OrderTaxInfo {
+  tax1Name?: string           // ชื่อภาษีที่ 1
+  tax1Value?: number          // มูลค่าภาษีที่ 1
+  tax2Name?: string           // ชื่อภาษีที่ 2
+  tax2Value?: number          // มูลค่าภาษีที่ 2
+  tax3Name?: string           // ชื่อภาษีที่ 3
+  tax3Value?: number          // มูลค่าภาษีที่ 3
+  tax4Name?: string           // ชื่อภาษีที่ 4
+  tax4Value?: number          // มูลค่าภาษีที่ 4
+  tax5Name?: string           // ชื่อภาษีที่ 5
+  tax5Value?: number          // มูลค่าภาษีที่ 5
+}
+
+// อินเทอร์เฟซสำหรับข้อมูลคำสั่งซื้อ
+interface OrderInfo {
+  financialStatus: string     // สถานะการเงินของคำสั่งซื้อ
+  paidAt?: Date               // วันที่ชำระเงิน
+  fulfillmentStatus: string   // สถานะการจัดส่งของคำสั่งซื้อ
+  fulfilledAt?: Date          // วันที่จัดส่ง
+  currency: string            // สกุลเงินของคำสั่งซื้อ
+  subtotal: number            // ยอดรวมย่อยของคำสั่งซื้อ
+  shipping: number            // ค่าจจัดส่งของคำสั่งซื้อ
+  taxes: number               // ภาษีของคำสั่งซื้อ
+  total: number               // ยอดรวมทั้งหมดของคำสั่งซื้อ
+  discountCode?: string       // รหัสส่วนลด
+  discountAmount?: number     // จำนวนเงินส่วนลด
+  shippingMethod?: string     // วิธีการจัดส่ง
+  createdAt: Date             // วันที่สร้างคำสั่งซื้อ
+  cancelledAt?: Date          // วันที่ยกเลิกคำสั่งซื้อ
+  paymentMethod?: string      // วิธีการชำระเงิน
+  paymentReference?: string   // อ้างอิงการชำระเงิน
+  refundedAmount?: number     // จำนวนเงินที่คืน
+  outstandingBalance?: number // เงินคงค้าง
+  employee?: string           // ชื่อพนักงานที่เกี่ยวข้อง
+  location?: string           // สถานที่ที่เกี่ยวข้อง
+  deviceId?: string           // รหัสอุปกรณ์
+  id: string                  // รหัสคำสั่งซื้อ
+  tags?: string               // แท็กสำหรับคำสั่งซื้อ
+  riskLevel?: string          // ระดับความเสี่ยง
+  source?: string             // แหล่งที่มาของคำสั่งซื้อ
+  paymentId?: string          // รหัสการชำระเงิน
+  paymentTermsName?: string   // ชื่อเงื่อนไขการชำระเงิน
+  nextPaymentDueAt?: Date     // วันที่ชำระเงินถัดไป
+  paymentReferences?: string  // อ้างอิงการชำระเงินทั้งหมด
+  receiptNumber?: string      // หมายเลขใบเสร็จ
+  duties?: number             // ภาษีศุลกากร
+}
+
+// อินเทอร์เฟซสำหรับข้อมูลกำหนดเองในคำสั่งซื้อ
+interface CustomOrderFields {
+  vendor?: string                 // ชื่อผู้ขาย
+  category?: string               // หมวดหมู่ของคำสั่งซื้อ
+  sorApasNumber?: string          // หมายเลข SOR / Apas
+  codesales?: string              // รหัสการขาย
+  receiptInvoice?: string         // ใบเสร็จ/ใบกำกับภาษี
+  plant?: string                  // ชื่อโรงงาน
+  addressLine1?: string           // ที่อยู่บรรทัดที่ 1 (อ้างอิงจากคอลัมน์ AA: Building Address1)
+  subdistrict?: string            // เขตย่อย
+  city?: string                   // เมือง
+  stateProvinceRegion?: string    // รัฐ/จังหวัด/ภูมิภาค
+  zip?: string                    // รหัสไปรษณีย์ (อ้างอิงจากคอลัมน์ AE: Billing Zip)
+  paymentReferencesRef?: string   // อ้างอิงการชำระเงิน (อ้างอิงจากคอลัมน์ AW: Payment Reference)
+  grandTotal?: number             // ยอดรวมทั้งหมด (อ้างอิงจากคอลัมน์ I: Subtotal)
+  normalSrp?: number              // ราคาปกติ (SRP) (อ้างอิงจากคอลัมน์ S: Lineitem price)
+  discount?: number               // จำนวนส่วนลด (อ้างอิงจากคอลัมน์ N: Discount Amount)
+  srpAfterPromotion?: number      // ราคาหลังโปรโมชัน (SRP) (อ้างอิงจากคอลัมน์ L: Total)
+  exvat?: number                  // ยอดรวมก่อนภาษี
+  grandTotalFinal?: number        // ยอดรวมทั้งหมดสุดท้าย (GRAND TOTAL)
+}
+
+// อินเทอร์เฟซหลักสำหรับคำสั่งซื้อทั้งหมด
+interface Order {
+  customer: OrderCustomerInfo     // ข้อมูลลูกค้า
+  lineItems: OrderLineItem[]      // รายการสินค้าในคำสั่งซื้อ (อาร์เรย์)
+  order: OrderInfo                // ข้อมูลคำสั่งซื้อ
+  taxes: OrderTaxInfo             // ข้อมูลภาษี
+  custom: CustomOrderFields       // ข้อมูลกำหนดเอง
+}
+
+
+
+import { iExtractFile } from '@/interfaces/ShopifyFujifilmOrder'
+
+// กำหนดประเภทข้อมูลสำหรับการแมปคอลัมน์ในไฟล์ Excel Shopify Fujifilm Order
+export const extractFileConfig: { shopify: iExtractFile } = {
+  shopify: {
+    // แมปคอลัมน์จาก Excel (เช่น 'A', 'B') ไปยังชื่อฟิลด์ในโครงสร้าง Order
+    // ตัวอย่าง: 'A' แมปไปยัง 'name', 'B' แมปไปยัง 'email', ฯลฯ
+    objectColumnMapping: {
+      A: 'name',                  // ชื่อของลูกค้า
+      B: 'email',                 // อีเมลของลูกค้า
+      C: 'financialStatus',       // สถานะการเงินของคำสั่งซื้อ
+      D: 'paidAt',                // วันที่ชำระเงิน
+      E: 'fulfillmentStatus',     // สถานะการจัดส่ง
+      F: 'fulfilledAt',           // วันที่จัดส่ง
+      G: 'acceptsMarketing',      // ระบุว่าลูกค้ายอมรับการตลาดหรือไม่
+      H: 'currency',              // สกุลเงินของคำสั่งซื้อ
+      I: 'subtotal',              // ยอดรวมย่อย
+      J: 'shipping',              // ค่าจัดส่ง
+      K: 'taxes',                 // ภาษี
+      L: 'total',                 // ยอดรวมทั้งหมด
+      M: 'discountCode',          // รหัสส่วนลด
+      N: 'discountAmount',        // จำนวนเงินส่วนลด
+      O: 'shippingMethod',        // วิธีการจัดส่ง
+      P: 'createdAt',             // วันที่สร้างคำสั่งซื้อ
+      Q: 'lineitemQuantity',      // จำนวนสินค้าในรายการ
+      R: 'lineitemName',          // ชื่อสินค้าในรายการ
+      S: 'lineitemPrice',          // ราคาสินค้าในรายการ
+      T: 'lineitemCompareAtPrice', // ราคาเปรียบเทียบสินค้าในรายการ
+      U: 'lineitemSku',           // รหัสสินค้า (SKU) ในรายการ
+      V: 'lineitemRequiresShipping', // ระบุว่าสินค้าต้องการการจัดส่งหรือไม่
+      W: 'lineitemTaxable',          // ระบุว่าสินค้าต้องเสียภาษีหรือไม่
+      X: 'lineitemFulfillmentStatus', // สถานะการจัดส่งสินค้าในรายการ
+      Y: 'billingName',           // ชื่อสำหรับใบแจ้งหนี้
+      Z: 'billingStreet',         // ถนนสำหรับใบแจ้งหนี้
+      AA: 'billingAddress1',      // ที่อยู่บรรทัดที่ 1 สำหรับใบแจ้งหนี้
+      AB: 'billingAddress2',      // ที่อยู่บรรทัดที่ 2 สำหรับใบแจ้งหนี้
+      AC: 'billingCompany',       // บริษัทสำหรับใบแจ้งหนี้
+      AD: 'billingCity',          // เมืองสำหรับใบแจ้งหนี้
+      AE: 'billingZip',           // รหัสไปรษณีย์สำหรับใบแจ้งหนี้
+      AF: 'billingProvince',      // จังหวัดสำหรับใบแจ้งหนี้
+      AG: 'billingCountry',       // ประเทศสำหรับใบแจ้งหนี้
+      AH: 'billingPhone',         // หมายเลขโทรศัพท์สำหรับใบแจ้งหนี้
+      AI: 'shippingName',         // ชื่อสำหรับการจัดส่ง
+      AJ: 'shippingStreet',       // ถนนสำหรับการจัดส่ง
+      AK: 'shippingAddress1',     // ที่อยู่บรรทัดที่ 1 สำหรับการจัดส่ง
+      AL: 'shippingAddress2',     // ที่อยู่บรรทัดที่ 2 สำหรับการจัดส่ง
+      AM: 'shippingCompany',      // บริษัทสำหรับการจัดส่ง
+      AN: 'shippingCity',         // เมืองสำหรับการจัดส่ง
+      AO: 'shippingZip',          // รหัสไปรษณีย์สำหรับการจัดส่ง
+      AP: 'shippingProvince',     // จังหวัดสำหรับการจัดส่ง
+      AQ: 'shippingCountry',      // ประเทศสำหรับการจัดส่ง
+      AR: 'shippingPhone',        // หมายเลขโทรศัพท์สำหรับการจัดส่ง
+      AS: 'notes',                // หมายเหตุเพิ่มเติมจากลูกค้า
+      AT: 'noteAttributes',       // คุณสมบัติหรือข้อมูลเพิ่มเติมในหมายเหตุ
+      AU: 'cancelledAt',          // วันที่ยกเลิกคำสั่งซื้อ
+      AV: 'paymentMethod',        // วิธีการชำระเงิน
+      AW: 'paymentReference',     // อ้างอิงการชำระเงิน
+      AX: 'refundedAmount',       // จำนวนเงินที่คืน
+      AY: 'vendor',               // ผู้ขาย
+      AZ: 'outstandingBalance',    // เงินคงค้าง
+      BA: 'employee',             // พนักงานที่เกี่ยวข้อง
+      BB: 'location',             // สถานที่
+      BC: 'deviceId',             // รหัสอุปกรณ์
+      BD: 'id',                   // รหัสคำสั่งซื้อ
+      BE: 'tags',                 // แท็กสำหรับคำสั่งซื้อ
+      BF: 'riskLevel',             // ระดับความเสี่ยง
+      BG: 'source',                // แหล่งที่มาของคำสั่งซื้อ
+      BH: 'lineitemDiscount',             // ส่วนลดสินค้าในรายการ
+      BI: 'tax1Name',               // ชื่อภาษีที่ 1
+      BJ: 'tax1Value',             // มูลค่าภาษีที่ 1
+      BK: 'tax2Name',              // ชื่อภาษีที่ 2
+      BL: 'tax2Value',             // มูลค่าภาษีที่ 2
+      BM: 'tax3Name',              // ชื่อภาษีที่ 3
+      BN: 'tax3Value',             // มูลค่าภาษีที่ 3
+      BO: 'tax4Name',              // ชื่อภาษีที่ 4
+      BP: 'tax4Value',             // มูลค่าภาษีที่ 4
+      BQ: 'tax5Name',              // ชื่อภาษีที่ 5
+      BR: 'tax5Value',             // มูลค่าภาษีที่ 5
+      BS: 'phone',                 // หมายเลขโทรศัพท์
+      BT: 'receiptNumber',             // หมายเลขใบเสร็จ
+      BU: 'duties',                // ภาษีศุลกากร
+      BV: 'billingProvinceName',             // ชื่อจังหวัดสำหรับใบแจ้งหนี้
+      BW: 'shippingProvinceName',             // ชื่อจังหวัดสำหรับการจัดส่ง
+      BX: 'paymentId',             // รหัสการชำระเงิน
+      BY: 'paymentTermsName',             // ชื่อเงื่อนไขการชำระเงิน
+      BZ: 'nextPaymentDueAt',             // วันที่ชำระเงินถัดไป
+      CA: 'paymentReferences',             // อ้างอิงการชำระเงินทั้งหมด
+    },
+    // รายการคอลัมน์ที่เป็นข้อมูลประเภท string
+    stringColumnMapping: [
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'M', 'O', 'P', 'R', 'U', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AY', 'BA', 'BB', 'BC', 'BE', 'BF', 'BG', 'BI', 'BJ', 'BK', 'BL', 'BM', 'BN', 'BO', 'BP', 'BQ', 'BR', 'BT', 'BU', 'BV', 'BW', 'BX', 'BY', 'BZ', 'CA',
+    ],
+    // รายการคอลัมน์ที่เป็นข้อมูลประเภท number
+    numberColumnMapping: ['I', 'J', 'K', 'L', 'N', 'Q', 'S', 'T', 'V', 'W', 'AX', 'AZ', 'BD', 'BH', 'BS'],
+  },
+}
+
+
+
+
+export interface shopee {
+  - A:NO.
+  - B:Category
+  - C:SOR / Apas Number
+  - D:SKU
+  - E:Remark
+  - F:ใบเสร็จ/ใบกำกับภาษี
+  - G:วันที่จัดส่ง
+  H:หมายเลขคำสั่งซื้อ
+  I:สถานะการสั่งซื้อ
+  J:สถานะการคืนเงินหรือคืนสินค้า
+  K:ชื่อผู้ใช้ (ผู้ซื้อ)
+  L:วันที่ทำการสั่งซื้อ
+  M:เวลาการชำระสินค้า
+  N:ช่องทางการชำระเงิน
+  O:ช่องทางการชำระเงิน (รายละเอียด)
+  P:แผนการผ่อนชำระ
+  Q:ค่าธรรมเนียม (%)
+  R:ตัวเลือกการจัดส่ง
+  S:วิธีการจัดส่ง
+  T:*หมายเลขติดตามพัสดุ
+  U:วันที่คาดว่าจะทำการจัดส่งสินค้า
+  V:เวลาส่งสินค้า
+  W:เลขอ้างอิง Parent SKU
+  X:ชื่อสินค้า
+  Y:เลขอ้างอิง SKU (SKU Reference No.)
+  Z:ชื่อตัวเลือก
+  AA:ราคาตั้งต้น
+  AB:ราคาขาย
+  AC:จำนวน
+  AD:จำนวนที่ส่งคืน
+  AE:ราคาขายสุทธิ
+  AF:ส่วนลดจาก Shopee
+  AG:โค้ดส่วนลดชำระโดยผู้ขาย
+  AH:โค้ด Coins Cashback ชำระโดยผู้ขาย
+  AI:โค้ดส่วนลดชำระโดย Shopee (เช่น โค้ดจากโปรแกรม ร้านโค้ดคุ้ม, โค้ดส่วนลด Shopee, โค้ดส่วนลด Shopee Mall)
+  AJ:โค้ดส่วนลด
+  AK:เข้าร่วมแคมเปญ bundle deal หรือไม่
+  AL:ส่วนลด bundle deal ชำระโดยผู้ขาย
+  AM:ส่วนลด bundle deal ชำระโดย Shopee
+  AN:ส่วนลดจากการใช้เหรียญ
+  AO:โปรโมชั่นช่องทางชำระเงินทั้งหมด
+  AP:ค่าคอมมิชชั่น
+  AQ:Transaction Fee
+  AR:ราคาสินค้าที่ชำระโดยผู้ซื้อ (THB)
+  AS:ค่าจัดส่งที่ชำระโดยผู้ซื้อ
+  AT:ค่าจัดส่งที่ Shopee ออกให้โดยประมาณ
+  AU:ค่าจัดส่งสินค้าคืน
+  AV:ค่าบริการ
+  AW:จำนวนเงินทั้งหมด
+  AX:ค่าจัดส่งโดยประมาณ
+  AY:ชื่อผู้รับ
+  AZ:หมายเลขโทรศัพท์
+  BA:หมายเหตุจากผู้ซื้อ
+  BB:ที่อยู่ในการจัดส่ง
+  BC:ประเทศ
+  BD:จังหวัด
+  BE:เขต/อำเภอ
+  BF:รหัสไปรษณีย์
+  BG:ประเภทคำสั่งซื้อ
+  BH:เวลาที่ทำการสั่งซื้อสำเร็จ
+  BI:บันทึก
+  BJ:ผู้ซื้อร้องขอใบกำกับภาษี
+  BK:ประเภทใบกำกับภาษี
+  BL:ชื่อ
+  BM:ประเภทสาขา
+  BN:ชื่อสาขา
+  BO:รหัสประจำสาขา
+  BP:ที่อยู่สำหรับออกใบกำกับภาษีแบบเต็มรูป
+  BQ:รายละเอียดที่อยู่
+  BR:แขวง/ตำบล
+  BS:เขต/อำเภอ
+  BT:จังหวัด
+  BU:รหัสไปรษณีย์
+  BV:หมายเลขประจำตัวผู้เสียภาษี
+  BW:หมายเลขโทรศัพท์สำหรับออกใบกำกับภาษี
+  BX:อีเมลสำหรับรับใบกำกับภาษี
+  BY:Category
+  BZ:SOR / Apas Number
+  CA:codesales
+  CB:ใบเสร็จ/ใบกำกับภาษี
+}
+
+

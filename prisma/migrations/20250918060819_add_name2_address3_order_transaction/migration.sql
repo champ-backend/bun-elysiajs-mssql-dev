@@ -1,0 +1,24 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- AlterTable
+ALTER TABLE [dbo].[ShopeeOrder] ADD [address3] NVARCHAR(max),
+[name2] NVARCHAR(100);
+
+-- AlterTable
+ALTER TABLE [dbo].[ShopifyOrder] ADD [address3] NVARCHAR(max),
+[name2] NVARCHAR(100);
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH

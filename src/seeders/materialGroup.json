@@ -1,0 +1,12 @@
+[
+  { "profitCenter": "P102020", "mg4": "Y1E", "materialGroup": "Trade rebate P102020" },
+  { "profitCenter": "P201015A", "mg4": "Y2A", "materialGroup": "Trade rebate P201015A" },
+  { "profitCenter": "P201060A", "mg4": "Y2M", "materialGroup": "Trade rebate P201060A" },
+  { "profitCenter": "P201080", "mg4": "Y2N", "materialGroup": "Trade rebate P201080" },
+  { "profitCenter": "P203020A", "mg4": "Y2H", "materialGroup": "Trade rebate P203020A" },
+  { "profitCenter": "P301020", "mg4": "Y3B", "materialGroup": "Trade rebate P301020" },
+  { "profitCenter": "P402010", "mg4": "Y4D", "materialGroup": "Trade rebate P402010" },
+  { "profitCenter": "P403020", "mg4": "Y4J", "materialGroup": "Trade rebate P403020" },
+  { "profitCenter": "P405010", "mg4": "Y4K", "materialGroup": "Trade rebate P405010" },
+  { "profitCenter": "P801010", "mg4": "Y8A", "materialGroup": "Trade rebate P801010" }
+]

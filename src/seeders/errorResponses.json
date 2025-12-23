@@ -1,0 +1,652 @@
+{
+  "group": "ERROR",
+  "responses": [
+    {
+      "name": "PAGE_NOT_FOUND",
+      "code": "404",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่พบข้อมูล"
+        },
+        {
+          "language": "EN",
+          "description": "Unsupported get request."
+        }
+      ]
+    },
+    {
+      "name": "SERVER_ERROR",
+      "code": "500",
+      "description": [
+        {
+          "language": "TH",
+          "description": "เกิดข้อผิดพลาดภายในเซิร์ฟเวอร์"
+        },
+        {
+          "language": "EN",
+          "description": "🔥internal server error."
+        }
+      ]
+    },
+    {
+      "name": "EMAIL_IS_ALREADY_EXISTS",
+      "code": "8000",
+      "description": [
+        {
+          "language": "TH",
+          "description": "มีอีเมลนี้ในระบบแล้ว"
+        },
+        {
+          "language": "EN",
+          "description": "Email already exists."
+        }
+      ]
+    },
+    {
+      "name": "USERNAME_IS_ALREADY_EXISTS",
+      "code": "8001",
+      "description": [
+        {
+          "language": "TH",
+          "description": "มีชื่อผู้ใช้นี้ในระบบแล้ว"
+        },
+        {
+          "language": "EN",
+          "description": "Username already exists."
+        }
+      ]
+    },
+    {
+      "name": "PHONE_NUMBER_IS_ALREADY_EXISTS",
+      "code": "8002",
+      "description": [
+        {
+          "language": "TH",
+          "description": "มีเบอร์โทรศัพท์นี้ในระบบแล้ว"
+        },
+        {
+          "language": "EN",
+          "description": "Phone number already exists."
+        }
+      ]
+    },
+    {
+      "name": "INSUFFICIENT_BALANCE",
+      "code": "8003",
+      "description": [
+        {
+          "language": "TH",
+          "description": "จำนวนเงินไม่เพียงพอ โปรดตรวจสอบอีกครั้ง"
+        },
+        {
+          "language": "EN",
+          "description": "Insufficient balance, Please check your balance."
+        }
+      ]
+    },
+    {
+      "name": "INVITE_REFERENCE_KEY_NOT_FOUND",
+      "code": "8004",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่พบ Invite reference key"
+        },
+        {
+          "language": "EN",
+          "description": "Invite reference key not found."
+        }
+      ]
+    },
+    {
+      "name": "ORDER_REFERENCE_KEY_NOT_FOUND",
+      "code": "8005",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่พบ Order reference key"
+        },
+        {
+          "language": "EN",
+          "description": "Order reference key not found."
+        }
+      ]
+    },
+    {
+      "name": "INPUT_DIFFERENT_VALUES",
+      "code": "8006",
+      "description": [
+        {
+          "language": "TH",
+          "description": "กรุณาระบุค่าที่ต่างกัน"
+        },
+        {
+          "language": "EN",
+          "description": "Please input different values."
+        }
+      ]
+    },
+    {
+      "name": "HAS_PROBLEM_GOOGLE_STORAGE",
+      "code": "8007",
+      "description": [
+        {
+          "language": "TH",
+          "description": "มีบางอย่างผิดปกติที่ Google Storage"
+        },
+        {
+          "language": "EN",
+          "description": "Something is wrong with Google Storage."
+        }
+      ]
+    },
+
+    {
+      "name": "HAS_PROBLEM_PAYPAL_WITHDRAW_ID_NOT_FOUND",
+      "code": "8008",
+      "description": [
+        {
+          "language": "TH",
+          "description": "PAYPAL พบข้อผิดพลาด ไม่พบ withdraw_id"
+        },
+        {
+          "language": "EN",
+          "description": "Something is wrong with PAYPAL, withdraw_id not found."
+        }
+      ]
+    },
+    {
+      "name": "OTP_NOT_FOUND",
+      "code": "8009",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่พบ OTP ดังกล่าว"
+        },
+        {
+          "language": "EN",
+          "description": "OTP is not found."
+        }
+      ]
+    },
+    {
+      "name": "OTP_EXPIRE",
+      "code": "8010",
+      "description": [
+        {
+          "language": "TH",
+          "description": "OTP หมดอายุ"
+        },
+        {
+          "language": "EN",
+          "description": "OTP is expired."
+        }
+      ]
+    },
+    {
+      "name": "PIN_HAS_VALUES",
+      "code": "8011",
+      "description": [
+        {
+          "language": "TH",
+          "description": "PIN ไม่สามารถถูกแทนที่ได้"
+        },
+        {
+          "language": "EN",
+          "description": "PIN is active."
+        }
+      ]
+    },
+    {
+      "name": "ACTION_DENIED",
+      "code": "8012",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่สามารถทำรายการได้"
+        },
+        {
+          "language": "EN",
+          "description": "Action denied."
+        }
+      ]
+    },
+    {
+      "name": "PLEASE_VERIFY_OTP",
+      "code": "8013",
+      "description": [
+        {
+          "language": "TH",
+          "description": "กรุณายืนยันรหัส OTP"
+        },
+        {
+          "language": "EN",
+          "description": "Please verify your OTP."
+        }
+      ]
+    },
+    {
+      "name": "KYC_INCOMPLETE",
+      "code": "8014",
+      "description": [
+        {
+          "language": "TH",
+          "description": "การทำรายการยืนยันตัวตนไม่ถูกต้อง"
+        },
+        {
+          "language": "EN",
+          "description": "KYC record is incomplete."
+        }
+      ]
+    },
+    {
+      "name": "TRANSACTION_DENIED",
+      "code": "8015",
+      "description": [
+        {
+          "language": "TH",
+          "description": "การทำรายการไม่ถูกต้อง โปรดตรวจสอบอีกครั้ง"
+        },
+        {
+          "language": "EN",
+          "description": "Transaction denied. Please try again."
+        }
+      ]
+    },
+    {
+      "name": "TRANSACTION_NOT_FOUND",
+      "code": "8016",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่พบรายการธุรกรรม"
+        },
+        {
+          "language": "EN",
+          "description": "Transaction is not found."
+        }
+      ]
+    },
+    {
+      "name": "VERIFICATION_CODE_NOT_FOUND",
+      "code": "8017",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่พบรหัสยืนยัน"
+        },
+        {
+          "language": "EN",
+          "description": "Verification code is not found."
+        }
+      ]
+    },
+    {
+      "name": "VERIFY_CODE_EXPIRE",
+      "code": "8018",
+      "description": [
+        {
+          "language": "TH",
+          "description": "Verify code หมดอายุ"
+        },
+        {
+          "language": "EN",
+          "description": "Verify code is expired."
+        }
+      ]
+    },
+    {
+      "name": "SERVICE_NOT_AVAILABLE",
+      "code": "8019",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่สามารถทำรายการได้"
+        },
+        {
+          "language": "EN",
+          "description": "Services is not available."
+        }
+      ]
+    },
+    {
+      "name": "TRADE_NOT_ALLOWED",
+      "code": "8020",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่สามารถทำรายการซื้อขายได้"
+        },
+        {
+          "language": "EN",
+          "description": "Trade not allowed."
+        }
+      ]
+    },
+    {
+      "name": "HAS_PROBLEM_REGISTER",
+      "code": "8021",
+      "description": [
+        {
+          "language": "TH",
+          "description": "มีบางอย่างผิดปกติที่ register"
+        },
+        {
+          "language": "EN",
+          "description": "Something is wrong with register."
+        }
+      ]
+    },
+
+    {
+      "name": "HAS_PROBLEM_SIGNALS",
+      "code": "8022",
+      "description": [
+        {
+          "language": "TH",
+          "description": "มีบางอย่างผิดปกติที่สัญญาน"
+        },
+        {
+          "language": "EN",
+          "description": "Something is wrong with signals."
+        }
+      ]
+    },
+    {
+      "name": "HAS_PROBLEM_NOTIFICATION",
+      "code": "8023",
+      "description": [
+        {
+          "language": "TH",
+          "description": "มีบางอย่างผิดปกติที่จดหมาย"
+        },
+        {
+          "language": "EN",
+          "description": "Something is wrong with notification."
+        }
+      ]
+    },
+
+    {
+      "name": "INSUFFICIENT_BALANCE_RESERVE",
+      "code": "8024",
+      "description": [
+        {
+          "language": "TH",
+          "description": "จำนวนเงินสำรองไม่เพียงพอ โปรดตรวจสอบอีกครั้ง"
+        },
+        {
+          "language": "EN",
+          "description": "Insufficient balance reserve, Please check your activity."
+        }
+      ]
+    },
+    {
+      "name": "HAS_PROBLEM_PARAMETER",
+      "code": "8025",
+      "description": [
+        {
+          "language": "TH",
+          "description": "มีบางอย่างผิดปกติที่พารามิเตอร์"
+        },
+        {
+          "language": "EN",
+          "description": "Something is wrong with parameter."
+        }
+      ]
+    },
+    {
+      "name": "PLEASE_VERIFY_EMAIL",
+      "code": "8026",
+      "description": [
+        {
+          "language": "TH",
+          "description": "กรุณายืนยันอีเมล"
+        },
+        {
+          "language": "EN",
+          "description": "Please verify your email."
+        }
+      ]
+    },
+    {
+      "name": "BANK_ACCOUNT_NOT_FOUND",
+      "code": "8027",
+      "description": [
+        {
+          "language": "TH",
+          "description": "กรุณายืนยันบัญชีธนาคาร"
+        },
+        {
+          "language": "EN",
+          "description": "Please verify your book bank."
+        }
+      ]
+    },
+    {
+      "name": "BANK_ACCOUNT_VERIFYING",
+      "code": "8028",
+      "description": [
+        {
+          "language": "TH",
+          "description": "กรุณารอการยืนยันบัญชีธนาคาร"
+        },
+        {
+          "language": "EN",
+          "description": "Please wait verify book bank process."
+        }
+      ]
+    },
+    {
+      "name": "UNAVAILABLE_OF_SERVICE",
+      "code": "8029",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่สามารถใช้บริการได้ในขณะนี้"
+        },
+        {
+          "language": "EN",
+          "description": "Unavailable."
+        }
+      ]
+    },
+    {
+      "name": "FAILED_PROCESSING",
+      "code": "8030",
+      "description": [
+        {
+          "language": "TH",
+          "description": "การประมวลผลการชำระเงินทั่วไปล้มเหลว"
+        },
+        {
+          "language": "EN",
+          "description": "General payment processing failure."
+        }
+      ]
+    },
+    {
+      "name": "INSUFFICIENT_BALANCE",
+      "code": "8031",
+      "description": [
+        {
+          "language": "TH",
+          "description": "เงินในบัญชีหรือวิธีการชําระเงินไม่เพียงพอถึงขีดจํากัดแล้ว"
+        },
+        {
+          "language": "EN",
+          "description": "Insufficient funds in the account or the payment method has reached its limit."
+        }
+      ]
+    },
+    {
+      "name": "PAYMENT_CANCELLED",
+      "code": "8032",
+      "description": [
+        {
+          "language": "TH",
+          "description": "การชำระเงินถูกยกเลิกโดยผู้ชำระเงิน"
+        },
+        {
+          "language": "EN",
+          "description": "Payment cancelled by payer."
+        }
+      ]
+    },
+    {
+      "name": "UNAUTHORIZED_TO_ACCESS",
+      "code": "8033",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่ได้รับอนุญาตเข้าถึงพาร์ทนี้."
+        },
+        {
+          "language": "EN",
+          "description": "Unauthorized access to this part."
+        }
+      ]
+    },
+    {
+      "name": "OBJECT_NOT_FOUND",
+      "code": "8034",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่พบ Object ดังกล่าว"
+        },
+        {
+          "language": "EN",
+          "description": "Object is not found."
+        }
+      ]
+    },
+    {
+      "name": "USER_CONCURRENT_AUTHENTICATION_OVER_LIMIT",
+      "code": "8035",
+      "description": [
+        {
+          "language": "TH",
+          "description": "การยืนยันตัวตนพร้อมกันของผู้ใช้เกินขีดจำกัด"
+        },
+        {
+          "language": "EN",
+          "description": "user's concurrent authentication is over limit."
+        }
+      ]
+    },
+    {
+      "name": "ADMIN_IS_ALREADY_EXISTS",
+      "code": "8036",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ชื่อผู้ดูแลระบบซ้ำ ! "
+        },
+        {
+          "language": "EN",
+          "description": "admin name already exists."
+        }
+      ]
+    },
+    {
+      "name": "NO_SUCH_FILE_DIRECTORY",
+      "code": "8037",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ไม่พบไฟล์หรือโฟลเดอร์"
+        },
+        {
+          "language": "EN",
+          "description": "no such file or directory."
+        }
+      ]
+    },
+    {
+      "name": "FILE_SIZE_EXCEEDED",
+      "code": "8038",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ขนาดไฟล์ที่อัพโหลดเกินกำหนด"
+        },
+        {
+          "language": "EN",
+          "description": "file size exceeded."
+        }
+      ]
+    },
+    {
+      "name": "INVALID_FILE_TYPE",
+      "code": "8038",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ประเภทไฟล์ไม่ถูกต้องครับ"
+        },
+        {
+          "language": "EN",
+          "description": "invalid file type."
+        }
+      ]
+    },
+    {
+      "name": "UPLOAD_NOT_FILE_INSTANCE",
+      "code": "8039",
+      "description": [
+        {
+          "language": "TH",
+          "description": "การอัปโหลดไม่ใช่อินสแตนซ์ไฟล์ครับ"
+        },
+        {
+          "language": "EN",
+          "description": "upload is not file instance."
+        }
+      ]
+    },
+    {
+      "name": "INVALID_UUID",
+      "code": "8040",
+      "description": [
+        {
+          "language": "TH",
+          "description": "UUID ไม่ถูกต้อง: ต้องเป็นสตริงเลขฐานสิบหกความยาว 32 อักขระ"
+        },
+        {
+          "language": "EN",
+          "description": "Invalid UUID: Must be a 32-character hexadecimal string"
+        }
+      ]
+    },
+    {
+      "name": "FILE_EXCEL_TYPE_PLATFORM_NOT_ALLOW",
+      "code": "8041",
+      "description": [
+        {
+          "language": "TH",
+          "description": "ประเภทไฟล์ Excel ไม่รองรับสำหรับแพลตฟอร์มนี้ กรุณาตรวจสอบและอัปโหลดไฟล์ที่ถูกต้อง"
+        },
+        {
+          "language": "EN",
+          "description": "The uploaded Excel file type is not allowed for this platform. Please check and upload the correct file."
+        }
+      ]
+    },
+    {
+      "name": "INVALID_VAT_RATE",
+      "code": "8042",
+      "description": [
+        {
+          "language": "TH",
+          "description": "อัตราภาษีมูลค่าเพิ่ม (VAT) ไม่ถูกต้อง"
+        },
+        {
+          "language": "EN",
+          "description": "Invalid VAT rate."
+        }
+      ]
+    }
+  ]
+}

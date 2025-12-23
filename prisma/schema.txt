@@ -1,0 +1,516 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                Int                 @id @default(autoincrement())
+  username          String              @unique
+  firstname         String              @db.NVarChar(150)
+  lastname          String              @db.NVarChar(150)
+  password          String              @db.NVarChar(100)
+  role              String              @db.NVarChar(10)
+  salt              String              @db.NVarChar(50)
+  verifyCode        String              @db.NVarChar(100)
+  status            String              @default("ACTIVE") @db.NVarChar(10)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  refreshToken      String              @db.NVarChar(100)
+  DeviceInformation DeviceInformation[]
+  FileUpload        FileUpload[]
+
+  Profile           Profile?
+  OrderTransactions OrderTransactions[]
+}
+
+model Profile {
+  id     Int  @id @default(autoincrement())
+  userId Int  @unique
+  User   User @relation(fields: [userId], references: [id])
+}
+
+model DeviceInformation {
+  id          Int      @id @default(autoincrement())
+  ipAddress   String   @db.NVarChar(50)
+  accessToken String   @db.NVarChar(255)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      Int?
+  tokenType   String   @db.NVarChar(10)
+  User        User?    @relation(fields: [userId], references: [id])
+}
+
+model FileUpload {
+  id              Int            @id @default(autoincrement())
+  fileKey         String         @unique @db.NVarChar(255)
+  fileName        String         @db.NVarChar(100)
+  type            String         @db.NVarChar(100)
+  path            String         @db.NVarChar(255)
+  size            Float
+  url             String         @db.NVarChar(255)
+  isPublic        Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  userId          Int
+  salesPlatformId Int?
+  SalesPlatform   SalesPlatform? @relation(fields: [salesPlatformId], references: [id])
+  User            User           @relation(fields: [userId], references: [id])
+}
+
+model SalesPlatform {
+  id         Int          @id @default(autoincrement())
+  name       String       @unique @db.NVarChar(50)
+  status     String       @default("ACTIVE") @db.NVarChar(10)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  FileUpload FileUpload[]
+
+  OrderTransactions OrderTransactions[]
+}
+
+model ProductMaster {
+  id             Int      @id @default(autoincrement())
+  plant          String?  @db.NVarChar(20)
+  material       String   @unique @db.NVarChar(255)
+  materialNumber String?  @db.NVarChar(255)
+  mg1            String?  @db.NVarChar(20)
+  mg2            String?  @db.NVarChar(20)
+  profitCenter   String?  @db.NVarChar(20)
+  baseUnit       String?  @db.NVarChar(20)
+  materialType   String?  @db.NVarChar(20)
+  profile        String?  @db.NVarChar(255)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model MaterialGroup {
+  id             Int      @id @default(autoincrement())
+  profitCenter   String   @db.NVarChar(20)
+  mg4            String   @unique @db.NVarChar(20)
+  materialGroup4 String   @db.NVarChar(50)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model mdw_ExportToSAP_l {
+  id           Int       @id(map: "PK_L_ExportToSAP") @default(autoincrement())
+  source_table String?   @db.VarChar(50)
+  source_id    Int?
+  createdAt    DateTime? @default(now(), map: "DF_L_ExportToSAP_createdAt1")
+  createdUser  Int?
+  updatedAt    DateTime?
+  updatedUser  Int?
+  deletedAt    DateTime?
+  deletedUser  Int?
+}
+
+model OrderTransactions {
+  id                  Int            @id @default(autoincrement())
+  accountCode         BigInt
+  salesmanCode        Int
+  purchaseOrder       String?        @db.NVarChar(20)
+  invoiceDate         DateTime
+  name                String?        @db.NVarChar(100)
+  address             String         @db.Text
+  address2            String?        @db.Text
+  postCode            String         @db.VarChar(10)
+  city                String         @db.NVarChar(255)
+  tel                 String         @db.NVarChar(255)
+  requireTaxInvoice   Boolean?
+  taxId               String?        @db.NVarChar(13)
+  materialProductCode String?        @db.NVarChar(255)
+  itemCat             String         @db.NVarChar(255)
+  quantity            Int
+  mg4                 String?        @db.NVarChar(255)
+  profitCenter        String?        @db.NVarChar(255)
+  UOM                 String         @db.NVarChar(255)
+  plant               String         @db.NVarChar(255)
+  storageLocation     String         @db.NVarChar(255)
+  SORPrice            Decimal        @db.Decimal(10, 2)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime
+  userId              Int?
+  salesPlatformId     Int?
+  SalesPlatform       SalesPlatform? @relation(fields: [salesPlatformId], references: [id])
+  User                User?          @relation(fields: [userId], references: [id])
+}
+
+model OrganizationUnit {
+  OrgUnitID              Int                @id(map: "PK__Organiza__4A793B8EE7143F42") @default(autoincrement())
+  OrgUnitName            String             @db.NVarChar(255)
+  ParentOrgUnitID        Int?
+  Level                  Int?
+  ManagerID              Int?
+  CreatedDate            DateTime?          @default(now(), map: "DF__Organizat__Creat__04CFADEC") @db.DateTime
+  IsActive               Boolean?           @default(true, map: "DF__Organizat__IsAct__05C3D225")
+  OrganizationUnit       OrganizationUnit?  @relation("OrganizationUnitToOrganizationUnit", fields: [ParentOrgUnitID], references: [OrgUnitID], onDelete: NoAction, onUpdate: NoAction, map: "FK__Organizat__Paren__06B7F65E")
+  other_OrganizationUnit OrganizationUnit[] @relation("OrganizationUnitToOrganizationUnit")
+}
+
+model ShopeeOrder {
+  id                    Int       @id @default(autoincrement())
+  accountCode           BigInt
+  salesmanCode          Int
+  purchaseOrder         String?   @db.NVarChar(20)
+  invoiceDate           DateTime
+  name                  String?   @db.NVarChar(100)
+  address               String    @db.Text
+  address2              String?   @db.Text
+  postCode              String    @db.VarChar(10)
+  city                  String    @db.NVarChar(255)
+  tel                   String    @db.NVarChar(255)
+  requireTaxInvoice     Boolean?
+  taxId                 String?   @db.NVarChar(13)
+  materialProductCode   String?   @db.NVarChar(255)
+  itemCat               String    @db.NVarChar(255)
+  quantity              Int
+  mg4                   String?   @db.NVarChar(255)
+  profitCenter          String?   @db.NVarChar(255)
+  UOM                   String    @db.NVarChar(255)
+  plant                 String    @db.NVarChar(255)
+  storageLocation       String    @db.NVarChar(255)
+  SORPrice              Decimal   @db.Decimal(10, 2)
+  invoiceEmail          String?   @db.NVarChar(255)
+  orderStatus           String?   @db.NVarChar(255)
+  refundStatus          String?   @db.NVarChar(255)
+  buyerName             String?   @db.NVarChar(255)
+  orderDate             DateTime?
+  paymentMethod         String?   @db.NVarChar(255)
+  paymentDetails        String?   @db.NVarChar(255)
+  installmentPlan       String?   @db.NVarChar(255)
+  transactionFeePercent String?   @db.NVarChar(255)
+  shippingOption        String?   @db.NVarChar(255)
+  shippingMethod        String?   @db.NVarChar(255)
+  trackingNumber        String?   @db.NVarChar(255)
+  estimatedDeliveryDate DateTime?
+  deliveryTime          String?   @db.NVarChar(255)
+  parentSku             String?   @db.NVarChar(255)
+  productName           String?   @db.NVarChar(255)
+  optionName            String?   @db.NVarChar(255)
+  originalPrice         Decimal?  @db.Decimal(10, 2)
+  salePrice             Decimal?  @db.Decimal(10, 2)
+  returnedQuantity      Int?
+  netSalePrice          Decimal?  @db.Decimal(10, 2)
+  shopeeDiscount        Decimal?  @db.Decimal(10, 2)
+  sellerVoucher         Decimal?  @db.Decimal(10, 2)
+  coinsCashbackSeller   Decimal?  @db.Decimal(10, 2)
+  shopeeVoucher         Decimal?  @db.Decimal(10, 2)
+  discountCode          String?   @db.NVarChar(255)
+  bundleDeal            String?   @db.NVarChar(255)
+  bundleDiscountSeller  Decimal?  @db.Decimal(10, 2)
+  bundleDiscountShopee  Decimal?  @db.Decimal(10, 2)
+  coinsUsed             Decimal?  @db.Decimal(10, 2)
+  allPaymentPromotions  Decimal?  @db.Decimal(10, 2)
+  commissionFee         Decimal?  @db.Decimal(10, 2)
+  transactionFee        Decimal?  @db.Decimal(10, 2)
+  totalBuyerPaid        Decimal?  @db.Decimal(10, 2)
+  shippingFeeBuyer      Decimal?  @db.Decimal(10, 2)
+  shippingFeeShopee     Decimal?  @db.Decimal(10, 2)
+  returnShippingFee     Decimal?  @db.Decimal(10, 2)
+  serviceFee            Decimal?  @db.Decimal(10, 2)
+  totalAmount           Decimal?  @db.Decimal(10, 2)
+  estimatedShippingFee  Decimal?  @db.Decimal(10, 2)
+  receiverName          String?   @db.NVarChar(255)
+  buyerNote             String?   @db.NVarChar(255)
+  shippingCountry       String?   @db.NVarChar(255)
+  shippingDistrict      String?   @db.NVarChar(255)
+  orderType             String?   @db.NVarChar(255)
+  orderSuccessTime      String?   @db.NVarChar(255)
+  orderNotes            String?   @db.NVarChar(255)
+  buyerInvoiceRequest   String?   @db.NVarChar(255)
+  invoiceType           String?   @db.NVarChar(255)
+  invoiceName           String?   @db.NVarChar(255)
+  invoiceBranchType     String?   @db.NVarChar(255)
+  invoiceBranchName     String?   @db.NVarChar(255)
+  invoiceBranchCode     String?   @db.NVarChar(255)
+  invoiceFullAddress    String?   @db.NVarChar(255)
+  invoiceAddressDetails String?   @db.NVarChar(255)
+  invoiceSubDistrict    String?   @db.NVarChar(255)
+  invoiceDistrict       String?   @db.NVarChar(255)
+  invoiceProvince       String?   @db.NVarChar(255)
+  invoicePostalCode     String?   @db.NVarChar(255)
+  taxpayerId            String?   @db.NVarChar(255)
+  invoicePhoneNumber    String?   @db.NVarChar(255)
+  category              String?   @db.NVarChar(255)
+  SOR_ApasNumber        String?   @db.NVarChar(255)
+  codeSales             String?   @db.NVarChar(255)
+  invoiceReceipt        String?   @db.NVarChar(255)
+  shippingAddress       String?   @db.NVarChar(255)
+  receiverPhone         String?   @db.NVarChar(255)
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime
+
+  @@unique([purchaseOrder, name, materialProductCode])
+}
+
+model ShopifyOrder {
+  id                        Int       @id @default(autoincrement())
+  accountCode               BigInt
+  salesmanCode              Int
+  purchaseOrder             String?   @db.NVarChar(20)
+  invoiceDate               DateTime
+  name                      String?   @db.NVarChar(100)
+  address                   String    @db.Text
+  address2                  String?   @db.Text
+  postCode                  String    @db.VarChar(6)
+  city                      String    @db.NVarChar(255)
+  tel                       String    @db.NVarChar(255)
+  requireTaxInvoice         Boolean?
+  taxId                     String?   @db.NVarChar(13)
+  materialProductCode       String?   @db.NVarChar(255)
+  itemCat                   String    @db.NVarChar(255)
+  quantity                  Int
+  mg4                       String?   @db.NVarChar(255)
+  profitCenter              String?   @db.NVarChar(255)
+  UOM                       String    @db.NVarChar(255)
+  plant                     String    @db.NVarChar(255)
+  storageLocation           String    @db.NVarChar(255)
+  SORPrice                  Decimal   @db.Decimal(10, 2)
+  orderName                 String?   @db.NVarChar(255)
+  email                     String?   @db.NVarChar(255)
+  financialStatus           String?   @db.NVarChar(255)
+  fulfillmentStatus         String?   @db.NVarChar(255)
+  fulfilledAt               DateTime?
+  acceptsMarketing          String?   @db.NVarChar(255)
+  currency                  String?   @db.NVarChar(255)
+  subtotal                  Decimal?  @db.Decimal(10, 2)
+  shipping                  Decimal?  @db.Decimal(10, 2)
+  taxes                     Decimal?  @db.Decimal(10, 2)
+  discountCode              String?   @db.NVarChar(255)
+  discountAmount            Decimal?  @db.Decimal(10, 2)
+  shippingMethod            String?   @db.NVarChar(255)
+  orderCreatedAt            DateTime?
+  lineitemName              String?   @db.NVarChar(255)
+  lineitemPrice             Decimal?  @db.Decimal(10, 2)
+  lineitemCompareAtPrice    Decimal?  @db.Decimal(10, 2)
+  lineitemRequiresShipping  Boolean?
+  lineitemTaxable           Boolean?
+  lineitemFulfillmentStatus String?   @db.NVarChar(255)
+  billingStreet             String?   @db.NVarChar(255)
+  billingAddress2           String?   @db.NVarChar(255)
+  billingCompany            String?   @db.NVarChar(255)
+  billingProvince           String?   @db.NVarChar(255)
+  billingCountry            String?   @db.NVarChar(255)
+  shippingName              String?   @db.NVarChar(255)
+  shippingStreet            String?   @db.NVarChar(255)
+  shippingAddress1          String?   @db.NVarChar(255)
+  shippingAddress2          String?   @db.NVarChar(255)
+  shippingCompany           String?   @db.NVarChar(255)
+  shippingCity              String?   @db.NVarChar(255)
+  shippingZip               String?   @db.NVarChar(255)
+  shippingProvince          String?   @db.NVarChar(255)
+  shippingCountry           String?   @db.NVarChar(255)
+  shippingPhone             String?   @db.NVarChar(255)
+  notes                     String?   @db.NVarChar(255)
+  noteAttributes            String?   @db.Text
+  cancelledAt               DateTime?
+  paymentMethod             String?   @db.NVarChar(255)
+  paymentReference          String?   @db.NVarChar(255)
+  refundedAmount            Decimal?  @db.Decimal(10, 2)
+  outstandingBalance        Decimal?  @db.Decimal(10, 2)
+  employee                  String?   @db.NVarChar(255)
+  location                  String?   @db.NVarChar(255)
+  deviceId                  String?   @db.NVarChar(255)
+  tags                      String?   @db.NVarChar(255)
+  riskLevel                 String?   @db.NVarChar(255)
+  source                    String?   @db.NVarChar(255)
+  lineitemDiscount          Decimal?  @db.Decimal(10, 2)
+  tax1Name                  String?   @db.NVarChar(255)
+  tax1Value                 String?   @db.NVarChar(255)
+  tax2Name                  String?   @db.NVarChar(255)
+  tax2Value                 String?   @db.NVarChar(255)
+  tax3Name                  String?   @db.NVarChar(255)
+  tax3Value                 String?   @db.NVarChar(255)
+  tax4Name                  String?   @db.NVarChar(255)
+  tax4Value                 String?   @db.NVarChar(255)
+  tax5Name                  String?   @db.NVarChar(255)
+  tax5Value                 String?   @db.NVarChar(255)
+  phone                     String?   @db.NVarChar(255)
+  receiptNumber             String?   @db.NVarChar(255)
+  duties                    String?   @db.NVarChar(255)
+  billingProvinceName       String?   @db.NVarChar(255)
+  shippingProvinceName      String?   @db.NVarChar(255)
+  paymentId                 String?   @db.NVarChar(255)
+  paymentTermsName          String?   @db.NVarChar(255)
+  nextPaymentDueAt          DateTime?
+  paymentReferences         String?   @db.NVarChar(255)
+  createdAt                 DateTime  @default(now())
+  updatedAt                 DateTime
+
+  @@unique([purchaseOrder, name, materialProductCode])
+}
+
+model sysdiagrams {
+  name         String @db.NVarChar(128)
+  principal_id Int
+  diagram_id   Int    @id(map: "PK__sysdiagr__C2B05B6174667EFE") @default(autoincrement())
+  version      Int?
+  definition   Bytes?
+
+  @@unique([principal_id, name], map: "UK_principal_name")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model cmn_OrgUnit_m {
+  id              Int
+  createdTime     DateTime? @default(now(), map: "DF_cmn_OrgUnit_m_createdTime")
+  createdUser     Int?
+  updatedTime     DateTime?
+  updatedUser     Int?
+  deletedTime     DateTime?
+  deletedUser     Int?
+  OrgUnitName     String?   @db.VarChar(255)
+  ParentOrgUnitID Int?
+  OrgLevel        Int?
+  ManagerID       Int?
+  UserActingID    Int?
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model cmn_Role_m {
+  id          Int
+  createdTime DateTime? @default(now(), map: "DF_cmn_Role_m_createdTime")
+  createdUser Int?
+  updatedTime DateTime?
+  updatedUser Int?
+  deletedTime DateTime?
+  deletedUser Int?
+  userID      Int?
+  role        String?   @db.VarChar(50)
+  description String?   @db.VarChar(100)
+  category    String?   @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model cmn_User_m {
+  id          Int
+  createdTime DateTime? @default(now(), map: "DF_cmn_User_createdTime")
+  createdUser Int?
+  updatedTime DateTime?
+  updatedUser Int?
+  deletedTime DateTime?
+  deletedUser Int?
+  username    Int?
+  password    String?   @db.VarChar(100)
+  firstName   String?   @db.VarChar(100)
+  lastName    String?   @db.VarChar(100)
+  department  Int?
+  jobGrade    String?   @db.VarChar(50)
+  position    String?   @db.VarChar(50)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model pcm_PR_Detail_t {
+  id           Int
+  createdTime  DateTime? @default(now(), map: "DF_pcm_PR_Detail_t_createdTime")
+  createdUser  Int?
+  updatedTime  DateTime?
+  updatedUser  Int?
+  deletedTime  DateTime?
+  deletedUser  Int?
+  PR_Header_id Int?
+  AttachFile   String?   @db.VarChar(100)
+  Attb1        String?   @db.VarChar(100)
+  Attb2        String?   @db.VarChar(100)
+  Attb3        String?   @db.VarChar(100)
+  Attb4        String?   @db.VarChar(100)
+  Attb5        String?   @db.VarChar(100)
+  Attb6        String?   @db.VarChar(100)
+  NetPrice     Decimal?  @db.Decimal(18, 2)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model pcm_PR_Header_t {
+  id                  Int
+  createdTime         DateTime? @default(now(), map: "DF_Table2_createdAt")
+  createdUser         Int?
+  updatedTime         DateTime?
+  updatedUser         Int?
+  deletedTime         DateTime?
+  deletedUser         Int?
+  PR_Code             String?   @db.VarChar(50)
+  PR_Type             Int?
+  CorpoationFunction  String?   @db.VarChar(1)
+  BU                  Int?
+  Requester           Int?
+  Department          Int?
+  DateRequest         Int?
+  ProfitCenter        Int?
+  CostCenter          Int?
+  GL_Account1         Int?
+  GL_Account2         Int?
+  Purpose             String?   @db.VarChar(500)
+  RequestDate         DateTime? @db.Date
+  Budget              Decimal?  @db.Decimal(18, 2)
+  Location            String?   @db.VarChar(500)
+  BriefDate           DateTime? @db.Date
+  PitchingDate        DateTime? @db.Date
+  AwardDate           DateTime? @db.Date
+  Description         String?   @db.VarChar(500)
+  APAS                String?   @db.VarChar(50)
+  ReceiveTOR_Date     DateTime?
+  SentQuotationDate   DateTime?
+  ReviewUser          Int?
+  ReviewTime          DateTime?
+  ApproveUser         Int?
+  ApproveTime         DateTime?
+  PO_NO               String?   @db.VarChar(50)
+  Goods_Recive        String?   @db.VarChar(50)
+  PR_Status           Int?
+  BriefDateConfirm    DateTime? @db.Date
+  PitchingDateConfirm DateTime? @db.Date
+  AwardDateConfirm    DateTime? @db.Date
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model pcm_Quotation_t {
+  id                     Int
+  createdTime            DateTime? @default(now(), map: "DF_pcm_Quotation_createdTime")
+  createdUser            Int?
+  updatedTime            DateTime?
+  updatedUser            Int?
+  deletedTime            DateTime?
+  deletedUser            Int?
+  PR_Header_id           Int?
+  VendorName             String?   @db.VarChar(100)
+  QuotationFile          String?   @db.VarChar(100)
+  QuotationDate          Decimal?  @db.Decimal(18, 2)
+  Price                  Decimal?  @db.Decimal(18, 2)
+  VAT                    Decimal?  @db.Decimal(18, 2)
+  NetPrice               Decimal?  @db.Decimal(18, 2)
+  PaymentTerm            String?   @db.VarChar(100)
+  ChooseVendorFinal      String?   @db.VarChar(1)
+  SupplierEvaluationFile String?   @db.VarChar(100)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model pcm_Reference_r {
+  id          Int
+  createdTime DateTime? @default(now(), map: "DF_pcm_Reference_r2_createdTime")
+  createdUser Int?
+  updatedTime DateTime?
+  updatedUser Int?
+  deletedTime DateTime?
+  deletedUser Int?
+  code        String?   @db.VarChar(50)
+  description String?   @db.VarChar(100)
+  category    Int?
+
+  @@ignore
+}

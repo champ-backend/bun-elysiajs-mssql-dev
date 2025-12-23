@@ -1,0 +1,149 @@
+
+docker build -t image_name . 
+
+
+docker ps -a
+docker ps -a                    # List all containers
+docker rm <container_id>        # Remove the container
+docker rmi <image_id>           # Remove the image
+docker stop <container_id>      # Stop the container
+docker start <container_id>     # Start the container
+docker logs -f <container_id>   # Follow the logs of the container
+
+
+##### DOCKER_COMPOSE #####
+docker-compose  down
+docker-compose up -d --build
+docker-compose logs -f
+
+=========================================================================
+version: "3.9"
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    command: redis-server --appendonly yes
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+    depends_on:
+      - middleware_api
+    ports:
+      - "80:80"
+
+
+  middleware_api:
+    image: middleware_api_image
+    build: .
+    ports:
+      - "42001:42001"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - ./prisma:/app/prisma
+      
+    working_dir: /app
+    command: ["bun", "run", "localhost"]
+    environment:
+      - NODE_ENV=localhost
+      - REDIS_HOST=redis://redis
+      - SERVER_PORT_ENV=42001
+      - DATABASE_TYPE_ENV=sqlserver
+      - DATABASE_HOST_ENV=192.168.24.23
+      - DATABASE_PORT_ENV=1433
+      - DATABASE_USERNAME_ENV=natthaphong
+      - DATABASE_NAME_ENV=dev_middleware
+      - DATABASE_URL=sqlserver://192.168.24.23:1433;database=dev_middleware;username=natthaphong;password=ArChamp@2024;trustServerCertificate=true;poolMax=20;poolMin=undefined;poolIdleTimeout=15000;poolAcquireTimeout=60000
+
+    restart: always
+
+volumes:
+  redis_data:
+
+
+
+############################ REDIS ####################################
+docker ps -a
+docker start <container_name>
+docker start priceless_keller
+docker logs priceless_keller                          #Check Redis Logs
+docker exec -it priceless_keller redis-cli            #Connect to Redis CLI
+
+--------------------------------
+#Then, test if Redis responds:
+>ping  
+<PONG  
+--------------------------------
+
+change container name 
+docker stop priceless_keller
+docker rename priceless_keller my-redis
+docker ps -a
+docker start my-redis
+docker ps
+docker exec -it my-redis redis-cli
+PING
+
+
+Create a New Redis Container with the Desired Name
+docker stop priceless_keller                         #Stop and remove the old container
+docker rm priceless_keller
+docker run --name my-redis -p 6379:6379 -d redis     #Run a new Redis container with the correct name
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXinternalXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+docker stop my-redis
+docker rm my-redis
+docker run --name my-redis -p 6379:6379 -d redis redis-server --bind 0.0.0.0 --protected-mode no
+
+
+
+
+Download Redis for Windows:
+Go to: https://github.com/microsoftarchive/redis/releases
+Download the latest .zip file.
+รัน Redis เป็น Background Process
+redis-server --service-install redis.windows.conf
+redis-server --service-start
+
+
+
+sc query Redis                      #ตรวจสอบว่า Redis กำลังทำงานอยู่หรือไม่
+redis-server --service-stop         # หยุด Redis Service
+redis-server --service-start        #เริ่ม Redis Service ใหม่
+
+*
+redis-server --service-uninstall    #ลบ Redis Service
+
+
+ทำให้ Redis ทำงานอัตโนมัติหลังรีสตาร์ท
+กด Win + R แล้วพิมพ์ services.msc
+หา Redis Server
+คลิกขวา > เลือก Properties
+ในหัวข้อ Startup type ให้เปลี่ยนเป็น Automatic
+กด Apply และ OK
+
+
+
+>ใช้ Redis CLI ทดสอบการเชื่อมต่อ
+เปิด Command Prompt (cmd)
+ไปที่โฟลเดอร์ที่มีไฟล์ redis-cli.exe
+รันคำสั่งนี้เพื่อเชื่อมต่อ Redis:
+redis-cli
+เมื่อเข้าไปที่ Redis CLI แล้ว ลองพิมพ์:
+ping
+ถ้า Redis ทำงานปกติ จะได้คำตอบ:
+PONG
+
+
+สรุป
+sc query Redis                → ตรวจสอบว่า Redis กำลังทำงานอยู่หรือไม่
+redis-cli ping                → เช็คว่า Redis ตอบสนองหรือไม่ (PONG)
+set/get testkey               → ทดสอบใส่และดึงข้อมูล
+netstat -ano | findstr :6379  → ตรวจสอบพอร์ตของ Redis

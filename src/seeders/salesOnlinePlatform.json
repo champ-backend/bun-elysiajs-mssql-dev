@@ -1,0 +1,22 @@
+[
+  {
+    "name": "SHOPIFY",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "SHOPEE",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "LAZADA",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "TIKTOK",
+    "status": "ACTIVE"
+  },
+  {
+    "name": "PRODUCT_MASTER",
+    "status": "ACTIVE"
+  }
+]

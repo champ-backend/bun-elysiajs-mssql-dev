@@ -1,0 +1,58 @@
+[
+  {
+    "firstName": "Fujifilm",
+    "lastName": "Thailand",
+    "email": "ftai@fujifilm.dev",
+    "role": "ADMIN",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Ftai",
+    "lastName": "Admin",
+    "email": "ftai.admin@fujifilm.dev",
+    "role": "ADMIN",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Natthaphong",
+    "lastName": "Thammabut",
+    "email": "Natthaphong.Thammabut@fujifilm.com",
+    "role": "USER",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Prinya",
+    "lastName": "Jantinmathon",
+    "email": "prinya.jantinmathon@fujifilm.com",
+    "role": "USER",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Pakhinai",
+    "lastName": "Waisand",
+    "email": "pakhinai.waisand@fujifilm.com",
+    "role": "USER",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Natthapat",
+    "lastName": "T",
+    "email": "Natthapat.T@fujifilm.com",
+    "role": "USER",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Kanyapat",
+    "lastName": "Saneha",
+    "email": "kanyapat.saneha@fujifilm.com",
+    "role": "USER",
+    "status": "ACTIVE"
+  },
+  {
+    "firstName": "Pattaraphorn",
+    "lastName": "Mathimata",
+    "email": "pattaraphorn.mathimata@fujifilm.com",
+    "role": "USER",
+    "status": "ACTIVE"
+  }
+]

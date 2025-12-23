@@ -1,0 +1,92 @@
+✅ สรุปคำสั่งที่จำเป็นในการตั้งค่า SSL บน Nginx (Ubuntu)
+1️⃣ ตรวจสอบว่ามีไฟล์ SSL อยู่หรือไม่
+
+ls -l /etc/ssl/
+ls -l /etc/ssl/certs/
+ls -l /etc/ssl/private/
+🔹 ถ้าไฟล์ .crt หรือ .key หายไป ต้องติดตั้ง SSL ใหม่
+
+2️⃣ ตรวจสอบความถูกต้องของ SSL Certificate
+
+openssl x509 -in /etc/ssl/yourdomain.crt -text -noout
+🔹 ใช้เช็คว่าไฟล์ .crt ถูกต้องหรือไม่
+
+3️⃣ ตรวจสอบวันหมดอายุของ SSL
+
+openssl x509 -in /etc/ssl/yourdomain.crt -noout -enddate
+🔹 ถ้า SSL หมดอายุ ต้องต่ออายุ (renew) หรือขอใบใหม่
+
+4️⃣ ตรวจสอบว่า Certificate และ Private Key ตรงกันหรือไม่
+
+openssl x509 -noout -modulus -in /etc/ssl/yourdomain.crt | openssl md5
+openssl rsa -noout -modulus -in /etc/ssl/yourdomain.key | openssl md5
+🔹 ค่าที่ออกมาต้องเหมือนกัน ถ้าต่างกัน แสดงว่าไฟล์ .crt และ .key ไม่ตรงกัน
+
+5️⃣ ตรวจสอบ SSL Config ใน Nginx
+
+grep -i 'ssl_certificate' /etc/nginx/sites-available/*
+🔹 ดูว่า Nginx ใช้ SSL Certificate จากไฟล์ไหนอยู่
+
+6️⃣ แก้ไขไฟล์ Nginx Config
+
+sudo nano /etc/nginx/sites-available/default
+เพิ่ม/แก้ไขการตั้งค่า SSL:
+
+server {
+    listen 443 ssl;
+    server_name yourdomain.com;
+
+    ssl_certificate /etc/ssl/yourdomain.crt;
+    ssl_certificate_key /etc/ssl/yourdomain.key;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+}
+📌 ตรวจสอบว่าเส้นทางไฟล์ .crt และ .key ถูกต้อง
+
+7️⃣ ทดสอบ Config Nginx
+
+sudo nginx -t
+🔹 ถ้าได้ test is successful แสดงว่าคอนฟิกไม่มีปัญหา
+
+8️⃣ รีโหลดหรือรีสตาร์ท Nginx
+
+sudo systemctl reload nginx   # ใช้ reload ถ้าคอนฟิกเปลี่ยนแปลง
+sudo systemctl restart nginx  # ใช้ restart ถ้าจำเป็นต้องเริ่มใหม่
+9️⃣ ตรวจสอบว่า HTTPS ทำงานได้หรือไม่
+
+curl -v https://yourdomain.com --ssl-no-revoke
+🔹 ถ้าโหลดได้แสดงว่า SSL ทำงานถูกต้อง
+
+🔄 ถ้าต้องการใช้ Let's Encrypt (Certbot)
+ติดตั้ง Certbot และขอ SSL ฟรี:
+
+
+sudo apt update
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx -d yourdomain.com
+📌 ระบบจะตั้งค่า SSL ให้อัตโนมัติ
+
+🔁 ต่ออายุ SSL (Renew)
+
+sudo certbot renew --dry-run
+📌 ใช้สำหรับตรวจสอบว่าการต่ออายุอัตโนมัติทำงานได้หรือไม่
+
+🔥 สรุปคำสั่งที่ใช้บ่อย
+
+ls -l /etc/ssl/	                                                    ตรวจสอบไฟล์ SSL
+openssl x509 -in yourdomain.crt -text -noout	                    ดูข้อมูล SSL
+openssl x509 -in yourdomain.crt -noout -enddate	                    เช็ควันหมดอายุของ SSL
+`openssl x509 -noout -modulus -in yourdomain.crt	                openssl md5`
+grep -i 'ssl_certificate' /etc/nginx/sites-available/*	            ดูว่า Nginx ใช้ไฟล์ SSL จากที่ไหน
+sudo nano /etc/nginx/sites-available/default	                    แก้ไขไฟล์คอนฟิก Nginx
+sudo nginx -t	                                                    ตรวจสอบว่าคอนฟิกถูกต้องหรือไม่
+sudo systemctl reload nginx	                                        รีโหลด Nginx หลังเปลี่ยนคอนฟิก
+curl -v https://yourdomain.com --ssl-no-revoke	                    เช็คว่า SSL ทำงานหรือไม่
+sudo certbot --nginx -d yourdomain.com	                            ขอ SSL ฟรีจาก Let's Encrypt
+sudo certbot renew --dry-run	                                    ทดสอบการต่ออายุ SSL
+
+
+
+
+openssl s_client -connect fujifyphotobooth.com:443 -showcerts    แสดง ssl data
