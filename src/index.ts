@@ -14,14 +14,11 @@ import { setupCronJobs } from '@/libs/Cron'
 import { iServer } from '@/interfaces/Config'
 import { initializeDatabase } from '@/controllers/ORMController'
 import { masterDataCreate } from '@/models/MasterDataCreate'
-import { OrderTransactionRoutes } from '@/routes/OrderTransaction'
 import chaching from '@/libs/Redis'
 import { AdminRoutes } from '@/routes/AdminRoutes'
 import { notFoundHandler } from '@/libs/NotFoundHandler'
 import loggingHandler from '@/libs/Logger'
 import ipClientHandler from '@/libs/IPClientMiddleware'
-import { ExportHistoriesRoutes } from '@/routes/ExportHistoriesRoutes'
-import { WarehouseRoutes } from '@/routes/WarehouseRoutes'
 
 const server = config.get<iServer>('server')
 const app = new Elysia({ serve: { maxRequestBodySize: server.maxRequestSize } })
@@ -44,9 +41,7 @@ app.use(BasicRoutes)
 app.use(UserRoutes)
 app.use(AdminRoutes)
 app.use(FileSystemRoutes)
-app.use(OrderTransactionRoutes)
-app.use(ExportHistoriesRoutes)
-app.use(WarehouseRoutes)
+
 app.all('*', notFoundHandler)
 
 const portPrefix: number = Number(process.env.SERVER_PORT_ENV) || server.port

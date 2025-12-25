@@ -4,11 +4,9 @@ import * as XLSX from 'xlsx'
 import * as fs from 'fs'
 import { object } from 'zod'
 import { Param } from '@prisma/client/runtime/library'
-import { computeItemsorderShopify, computeResultItemsOrderShopify } from '@/controllers/ShopifyOrderController'
 import ExcelExtractorTransformer from './ExtractAndTranformerController'
 import { iHeaderMapType } from '@/interfaces/FileSystem'
-import { computeResultItemsOrderTiktok } from './TiktokController'
-import { computeResultItemsShopee } from './ShopeeOrderController'
+
 async function checkDataPlatform(rawHeaders: string[]) {
   try {
     console.log({ tiktok: extractFileConfig.tiktok.stringHeaderMapping })
@@ -103,7 +101,6 @@ export const processExtractAndAnalysisShopifyOrder = async (excelFilePath: strin
       extractedData.push(row)
     }
 
-    // console.log({ index: extractedData[0], length: extractedData.length })
     return { data: extractedData }
   } catch (error) {
     throw throwError(error, 'processExtractAndAnalysisShopifyOrder')
@@ -196,101 +193,7 @@ export const processExtractAndAnalysisProductMaster = async (excelFilePath: stri
   }
 }
 
-export const processExtractAndAnalysisOrder = async (excelFilePath: string, platform: 'shopify' | 'shopee' | 'lazada' | 'tiktok', type?: string): Promise<{ data: any[] }> => {
-  try {
-    const platformConfig = extractFileConfig[platform]
-    if (!platformConfig) {
-      throw new Error(`Platform ${platform} is not supported.`)
-    }
-    const { objectColumnMapping, stringColumnMapping, numberColumnMapping, headerObjectMapping } = platformConfig
-    if (!fs.existsSync(excelFilePath)) {
-      throw new Error(`File not found: ${excelFilePath}`)
-    }
-    let workbook
-    if (type === 'text/csv') {
-      const fileContent = fs.readFileSync(excelFilePath, 'utf8')
-      workbook = XLSX.read(fileContent, { type: 'string' })
-    } else {
-      workbook = XLSX.readFile(excelFilePath)
-    }
-    const sheetName = workbook.SheetNames[0]
-    const worksheet = workbook.Sheets[sheetName] as XLSX.WorkSheet
 
-    if (!worksheet['!ref']) {
-      throw new Error('Worksheet is empty or corrupted')
-    }
-
-    const rawData: any[] = XLSX.utils.sheet_to_json(worksheet)
-    type FieldType = 'string' | 'number' | 'boolean' | 'datetime'
-    const headerMap: Record<string, { keyName: string; type: FieldType }> = headerObjectMapping as Record<string, { keyName: string; type: FieldType }>
-    const extractedData = rawData.map(row => {
-      const mappedRow: any = {}
-      for (const headerKey in row) {
-        const config = headerMap[headerKey]
-        if (config) {
-          let value = row[headerKey]
-          switch (config.type) {
-            case 'string':
-              value = String(value)
-              break
-            case 'number':
-              value = Number(value)
-              break
-            case 'boolean':
-              value = value === 'TRUE' || value === 'true' || value === true
-              break
-          }
-          mappedRow[config.keyName] = value
-        }
-      }
-      return mappedRow
-    })
-
-    if (platform === 'shopify') {
-      const extractedDataShopify = await computeResultItemsOrderShopify(extractedData)
-      return { data: extractedDataShopify }
-    }
-
-    if (platform === 'shopee') {
-      const extractedDataShopee = await computeResultItemsShopee(extractedData)
-      return { data: extractedDataShopee }
-    }
-    return { data: extractedData }
-  } catch (error) {
-    throw new Error(`processExtractAndAnalysisOrder Error (${platform}): ${error}`)
-  }
-}
-
-export const dynamicProcessExtractAndAnalysisOrder = async (excelFilePath: string, platform: 'shopify' | 'shopee' | 'lazada' | 'tiktok', type?: string): Promise<{ data: any[] }> => {
-  try {
-    const platformConfig = extractFileConfig[platform]
-    if (!platformConfig) {
-      throw new Error(`Platform ${platform} is not supported.`)
-    }
-    const { headerObjectMapping } = platformConfig
-    if (!fs.existsSync(excelFilePath)) {
-      throw new Error(`File not found: ${excelFilePath}`)
-    }
-    const filePath = excelFilePath
-    const sheetIndex = 1
-    const keyCase = 'camelCase'
-    const tiktok = new ExcelExtractorTransformer(filePath, sheetIndex, keyCase)
-    const loadData = await tiktok.RunLoadExcelFile()
-    if (!headerObjectMapping) {
-      throw new Error(`headerObjectMapping is not provided for platform ${platform}`)
-    }
-    const headerMap: iHeaderMapType = headerObjectMapping as iHeaderMapType
-    const extractedData = await tiktok.RunMapDataTransform(loadData.rawDataSheet, headerMap)
-
-    if (platform === 'tiktok') {
-      const extractedDataTiktok = await computeResultItemsOrderTiktok(extractedData)
-      return { data: extractedDataTiktok }
-    }
-    return { data: Array.isArray(extractedData) ? extractedData : [extractedData] }
-  } catch (error) {
-    throw throwError(error, 'dynamicProcessExtractAndAnalysisOrder')
-  }
-}
 
 export const extractedDataExcelDemo = async () => {
   try {

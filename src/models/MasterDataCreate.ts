@@ -7,12 +7,12 @@ import { findManyUserWhere } from '@/models/Users'
 import { userAdminRegister } from '@/controllers/AuthenticationController'
 import { createMaterialGroupOne, findManyMaterialGroupWhere } from '@/models/MaterialGroup'
 import { iMaterialGroup } from '@/interfaces/materialGroup'
-import { autoCreateProductMaster } from '@/controllers/ProductMasterController'
+
 import { createVatRatePrisma, findManyVatRatesWhere } from '@/models/VatRates'
 import { findManyProductMaster } from '@/models/ProductMaster'
 import { findAllWarehouse } from '@/models/Warehouse'
 import { matchesStockWhere } from '@/libs/OrderTransactions'
-import { extractedDataExcelDemo } from '@/controllers/ExtractFileController'
+
 
 export const masterDataCreate = async (): Promise<void> => {
   try {
@@ -24,7 +24,6 @@ export const masterDataCreate = async (): Promise<void> => {
       findManyProductMaster({})
     ])
     await Promise.all([createSalesPlatform(salesPlatform, salesPlatformData), createAdminDefault(adminDefault, userAdminData), createMaterialGroups(materialGroups, materialGroupsData), createVatRates(vatRates, vatRateData)])
-    if (!productMasterData.length) await autoCreateProductMaster('src/content/productMaster.xlsx')
   } catch (error) {
     throw throwError(error, 'masterDataCreate')
   }
